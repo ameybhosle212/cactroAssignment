@@ -44,10 +44,6 @@ app.post("/", async (req, res) => {
       const allSongs = await Songs.find().populate('artist').limit(10);
       output['songs'] = allSongs || [];
       output['followingArtist'] = filteredFollowing || [];
-      const followingArtist = await FollowingUserToArtist.findOne({ user: user_id }).populate('artist_ID');
-      if (followingArtist) {
-        output['followingUsers'] = followingArtist[0]
-      }
       return res.json({
         'error': null,
         'status': 'ok',
